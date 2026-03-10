@@ -1,44 +1,43 @@
 
-
-
 # Proiect Tehnologii Mobile
 
 ## Descriere proiect
 
 Acest proiect reprezintă o aplicație mobilă dezvoltată cu **Flutter** pentru disciplina **Tehnologii Mobile**.
-Aplicația va permite utilizatorilor să descopere și să planifice **călătorii organizate**, să vizualizeze detaliile acestora și să se înscrie la diferite experiențe turistice.
+Aplicația permite utilizatorilor să descopere diferite **modele de manichiură**, să aleagă serviciul dorit și să își facă **programări online la salon**.
 
-Aplicația va consuma **servicii web (API)** pentru a obține informațiile despre călătorii și va utiliza **SQLite** pentru stocarea locală a anumitor date (ex: favorite sau înscrieri salvate local).
+Aplicația va consuma **servicii web (REST API)** pentru a obține informații despre modelele de unghii și serviciile disponibile și va utiliza **SQLite** pentru stocarea locală a anumitor date (ex: favorite sau programări salvate).
 
 Scopul aplicației este să ofere o interfață mobilă prin care utilizatorii pot:
 
-* vizualiza mai multe călătorii disponibile
-* căuta sau explora destinații
-* vedea detalii complete despre o călătorie
-* consulta criteriile de participare
-* salva călătorii favorite
-* trimite o cerere de înscriere
+* vizualiza modele de unghii
+* explora diferite tipuri de servicii de manichiură
+* vedea detalii despre fiecare model sau serviciu
+* salva modele preferate
+* crea un cont de utilizator
+* realiza programări online
+* efectua plata serviciilor înainte de programare
 
 ---
 
 # Conceptul aplicației
 
-Aplicația va funcționa ca o platformă de **planificare și descoperire a călătoriilor organizate**.
-Pe pagina principală vor fi afișate mai multe călătorii sub formă de carduri cu imagini atractive.
+Aplicația va funcționa ca o platformă de **descoperire și programare pentru servicii de manichiură**.
 
-Fiecare călătorie va conține informații detaliate precum:
+Pe pagina principală vor fi afișate **modele de unghii** sub formă de carduri cu imagini.
 
-* destinația
-* durata excursiei
-* programul zilnic (dimineață, prânz, seară)
-* activitățile incluse
-* mesele incluse
-* cerințe de participare
-* documente necesare (dacă este cazul)
-* recomandări privind îmbrăcămintea sau echipamentul
-* intervalul de vârstă recomandat
+Fiecare model poate conține informații precum:
 
-Utilizatorul poate selecta o călătorie pentru a vedea toate detaliile și pentru a se înscrie.
+* tipul de manichiură
+* stilul modelului
+* nivelul de complexitate
+* durata estimată a realizării
+* prețul serviciului
+* descrierea modelului
+
+Utilizatorul poate selecta un model pentru a vedea mai multe detalii și pentru a realiza o **programare la salon**.
+
+Aplicația permite și salvarea modelelor preferate pentru a putea fi accesate ulterior.
 
 ---
 
@@ -48,61 +47,74 @@ Aplicația va avea următoarele ecrane principale:
 
 ## 1. Home Page
 
-Pagina principală va afișa mai multe călătorii disponibile.
+Pagina principală va afișa mai multe **modele de unghii disponibile**.
 
 Fiecare element din listă va conține:
 
 * imagine reprezentativă
-* numele destinației
-* durata călătoriei
-* locația
+* numele modelului
+* tipul de manichiură (ex: clasică, semi-permanentă, construcție gel)
+* preț orientativ
 * un buton pentru vizualizarea detaliilor
 
-Această pagină permite utilizatorului să exploreze rapid mai multe opțiuni de călătorie.
+Această pagină permite utilizatorului să exploreze rapid diferite stiluri de manichiură.
 
 ---
 
-## 2. Pagina de detalii a călătoriei
+## 2. Pagina de detalii a modelului
 
-Această pagină va conține informații complete despre excursia selectată.
+Această pagină va conține informații complete despre modelul selectat.
 
 Informațiile pot include:
 
-* descrierea călătoriei
-* durata
-* programul pe zile sau pe intervale (dimineață / prânz / seară)
-* mesele incluse
-* activitățile planificate
-* criteriile de participare
-* vârsta recomandată
-* echipamentul sau îmbrăcămintea necesară
-* documentele necesare (ex: pașaport)
+* descrierea modelului
+* tipul de serviciu
+* durata estimată a procedurii
+* prețul
+* recomandări privind întreținerea manichiurii
 
-Pe această pagină utilizatorul va avea și opțiunea de a se înscrie.
+Pe această pagină utilizatorul va avea opțiunea de a:
+
+* salva modelul la **favorite**
+* continua către **programare**
 
 ---
 
-## 3. Pagina de înscriere
+## 3. Pagina de programare
 
-Această pagină va permite utilizatorului să completeze un formular pentru participarea la o călătorie.
+Această pagină va permite utilizatorului să realizeze o **programare online** pentru serviciul dorit.
 
 Exemple de informații colectate:
 
 * nume
-* vârstă
 * email / telefon
-* data dorită pentru excursie
+* tipul de serviciu (semi-permanent, clasic, construcție etc.)
+* data și ora programării
 * observații suplimentare
+
+După completarea formularului, utilizatorul poate continua către **plata online a serviciului**.
 
 Datele pot fi trimise către un serviciu web sau salvate temporar local.
 
 ---
 
-## 4. Pagina de favorite / rezervări
+## 4. Pagina de favorite
 
-Utilizatorul poate salva anumite călătorii preferate pentru a le consulta ulterior.
+Utilizatorul poate salva anumite **modele de unghii preferate** pentru a le consulta ulterior.
 
 Aceste date vor fi salvate local folosind **SQLite**, astfel încât aplicația să demonstreze utilizarea unei baze de date locale.
+
+---
+
+## 5. Pagina de cont utilizator
+
+Aplicația va permite utilizatorilor să își creeze un **cont personal**.
+
+Prin intermediul contului, utilizatorii pot:
+
+* vizualiza programările realizate
+* gestiona preferințele
+* salva modele favorite
 
 ---
 
@@ -113,7 +125,7 @@ Codul aplicației este organizat în interiorul folderului **lib** folosind o st
 ```text
 lib
  ├── models
- │   └── travel.dart
+ │   └── nail_model.dart
  │
  ├── services
  │   ├── api_service.dart
@@ -121,12 +133,12 @@ lib
  │
  ├── screens
  │   ├── home_page.dart
- │   ├── travel_details_page.dart
- │   ├── registration_page.dart
+ │   ├── nail_details_page.dart
+ │   ├── booking_page.dart
  │   └── favorites_page.dart
  │
  ├── widgets
- │   └── travel_card.dart
+ │   └── nail_card.dart
  │
  └── main.dart
 ```
@@ -134,7 +146,7 @@ lib
 ### Explicația folderelor
 
 **models**
-Conține modelele de date ale aplicației (ex: modelul unei călătorii).
+Conține modelele de date ale aplicației (ex: modelul unui design de unghii).
 
 **services**
 Conține logica pentru:
@@ -146,7 +158,7 @@ Conține logica pentru:
 Conține ecranele principale ale aplicației.
 
 **widgets**
-Conține componente UI reutilizabile (ex: carduri pentru afișarea călătoriilor).
+Conține componente UI reutilizabile (ex: carduri pentru afișarea modelelor de unghii).
 
 **main.dart**
 Punctul de pornire al aplicației.
@@ -165,18 +177,18 @@ Pentru dezvoltarea proiectului, sarcinile pot fi împărțite astfel:
 
 **Membru 2**
 
-* implementarea listei de călătorii
+* implementarea listei de modele de unghii
 * integrarea API pentru încărcarea datelor
 
 **Membru 3**
 
 * implementarea paginii de detalii
-* design UI pentru prezentarea informațiilor
+* design UI pentru prezentarea modelelor
 
 **Membru 4**
 
 * implementarea SQLite
-* salvarea călătoriilor favorite
+* salvarea modelelor favorite
 
 ---
 
@@ -200,3 +212,11 @@ flutter run
 * REST API
 * SQLite
 * Git / GitHub
+
+---
+
+💡 Dacă vrei, îți pot face și:
+
+* **o versiune puțin mai “profesională” pentru README (care ia puncte mai multe la proiect)**
+* **ideea de API fake pentru modele de unghii**
+* **schema de bază de date SQLite pentru favorite și programări** (profesorii cer foarte des asta).
